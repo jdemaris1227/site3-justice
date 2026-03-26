@@ -391,7 +391,7 @@ VOTING: https://elections.maryland.gov/voter_registration/lookup.html · 410-386
 TONE: Educational, factual, direct. 2-3 paragraphs. Always encourage voting.`;
 
 const hist3 = [];
-async function callAI3(msg){hist3.push({role:'user',content:msg});const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:justiceSystem,messages:hist3})});const d=await r.json();const reply=d.content?.[0]?.text||'Connection error. Please try again.';hist3.push({role:'assistant',content:reply});return reply;}
+async function callAI3(msg){hist3.push({role:'user',content:msg});const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:justiceSystem,messages:hist3})});const d=await r.json();const reply=d.content?.[0]?.text||'Connection error. Please try again.';hist3.push({role:'assistant',content:reply});return reply;}
 function addMsg3(role,text){const c=document.getElementById('chatMsgs3');const d=document.createElement('div');d.className=`m2 ${role}`;const icon=role==='bot'?'⚖':'◉';d.innerHTML=`<div class="m2-icon">${icon}</div><div class="m2-bubble">${text.replace(/\n/g,'<br>')}</div>`;c.appendChild(d);c.scrollTop=c.scrollHeight;}
 function showT3(){const c=document.getElementById('chatMsgs3');const d=document.createElement('div');d.className='m2 bot';d.id='typ3';d.innerHTML=`<div class="m2-icon">⚖</div><div class="m2-bubble"><div class="typing2"><div class="t2d"></div><div class="t2d"></div><div class="t2d"></div></div></div>`;c.appendChild(d);c.scrollTop=c.scrollHeight;}
 function removeT3(){const e=document.getElementById('typ3');if(e)e.remove();}
