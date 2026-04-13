@@ -101,6 +101,16 @@
   .cta-btn-outline{padding:14px 32px;background:transparent;color:white;border:1px solid rgba(255,255,255,0.5);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;}
   .cta-btn-outline:hover{border-color:white;background:rgba(255,255,255,0.1);}
 
+  /* REPORT */
+  .report-section { background: var(--dark); padding: 80px 40px; text-align: center; border-top: 1px solid rgba(192,57,43,0.2); }
+  .report-section .exp-label { justify-content: center; }
+  .report-section .exp-label::after { display: none; }
+  .report-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 56px); letter-spacing: 0.04em; color: var(--white); margin-bottom: 12px; }
+  .report-section p { font-size: 18px; color: var(--sand); max-width: 620px; margin: 0 auto 32px; font-weight: 300; line-height: 1.6; }
+  .report-download { display: inline-block; background: var(--red); color: white; padding: 14px 36px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; border: none; cursor: pointer; }
+  .report-download:hover { background: var(--red-dark); }
+  .report-meta { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--dust); line-height: 1.8; margin-top: 20px; }
+
   /* CHAT */
   .chat-section{background:var(--mid);padding:80px 40px;}
   .chat-inner{max-width:700px;margin:0 auto;}
@@ -187,6 +197,7 @@
     <a href="#carroll">The Carroll County Case</a>
     <a href="#cover">The Cover Story</a>
     <a href="#bills">The Bills He Killed</a>
+    <a href="#report">Evidence</a>
     <a href="#network">Join Network</a>
     <a href="#action">Take Action</a>
   </div>
@@ -365,6 +376,17 @@
     <a href="https://opposeallanculver.com" target="_blank" class="cta-btn-outline">Full Documentation</a>
   </div>
 </div>
+
+<!-- REPORT -->
+<section class="report-section" id="report">
+  <div class="section-inner">
+    <div class="exp-label">The Evidence</div>
+    <h2>The Full Documented Case</h2>
+    <p>22 pages of court records, sworn testimony, legislative records, and published journalism. Every claim sourced. Every quote attributed. Read it yourself.</p>
+    <a href="/culver-citizens-report.pdf" download class="report-download">Download the Evidence (PDF) →</a>
+    <p class="report-meta">Carroll County Citizens' Report · March 2026 · Version 1.0<br>Paid for by Carroll County Small Businesses PAC. Not authorized by any candidate or candidate's committee.</p>
+  </div>
+</section>
 
 <!-- CHATBOT -->
 <section class="chat-section" id="ask">
