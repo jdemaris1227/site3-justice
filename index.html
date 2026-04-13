@@ -181,6 +181,26 @@
   .rrn3-ok p{font-size:15px;color:var(--sand);line-height:1.7;font-weight:300;}
   .rrn3-disc{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--charcoal);text-align:center;margin-top:16px;line-height:1.8;letter-spacing:0.04em;}
   @media(max-width:640px){nav,.hero,.explainer,.cc-case,.cover-story,.legislation,.cta-band,.chat-section,footer{padding-left:20px;padding-right:20px;}.topbar{padding:8px 20px;flex-direction:column;gap:4px;text-align:center;}.hero h1{font-size:52px;}.nav-links{display:none;}.ct-item{flex-direction:column;}.ct-date{text-align:left;padding-top:0;}}
+
+  /* FLOATING CHAT WIDGET */
+  .chat-widget-btn { position:fixed; bottom:28px; right:28px; z-index:999; width:60px; height:60px; border-radius:50%; background:var(--red); color:white; border:none; cursor:pointer; font-size:24px; box-shadow:0 4px 20px rgba(0,0,0,0.4); transition:all 0.3s; display:flex; align-items:center; justify-content:center; }
+  .chat-widget-btn:hover { transform:scale(1.08); background:var(--red-dark); }
+  .chat-widget-panel { position:fixed; bottom:100px; right:28px; z-index:998; width:380px; max-height:520px; background:var(--dark); border:1px solid rgba(192,57,43,0.3); box-shadow:0 8px 40px rgba(0,0,0,0.5); display:none; flex-direction:column; overflow:hidden; }
+  .chat-widget-panel.open { display:flex; }
+  .chat-widget-panel .chat-header { padding:12px 16px; background:rgba(192,57,43,0.08); border-bottom:1px solid rgba(192,57,43,0.2); display:flex; align-items:center; gap:10px; }
+  .chat-widget-close { margin-left:auto; background:none; border:none; color:var(--dust); font-size:18px; cursor:pointer; }
+  .chat-widget-panel .chat-messages { height:300px; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px; }
+  .chat-widget-panel .chat-messages::-webkit-scrollbar{width:3px;}
+  .chat-widget-panel .chat-messages::-webkit-scrollbar-thumb{background:rgba(192,57,43,0.3);}
+  .chat-widget-panel .chat-quick-replies { padding:0 16px 8px; display:flex; gap:6px; flex-wrap:wrap; border-top:1px solid rgba(192,57,43,0.12); padding-top:8px; }
+  .chat-widget-panel .quick-reply { font-size:10px; padding:6px 12px; background:transparent; border:1px solid rgba(192,57,43,0.25); font-family:'IBM Plex Mono',monospace; color:var(--dust); cursor:pointer; transition:all 0.2s; letter-spacing:0.05em; }
+  .chat-widget-panel .quick-reply:hover { border-color:var(--red); color:var(--cream); }
+  .chat-widget-panel .chat-input-bar { display:flex; border-top:1px solid rgba(192,57,43,0.12); }
+  .chat-widget-panel .chat-input { flex:1; padding:12px 14px; background:transparent; border:none; outline:none; font-family:'Crimson Pro',serif; font-size:15px; color:var(--cream); caret-color:var(--red); }
+  .chat-widget-panel .chat-input::placeholder { color:rgba(255,255,255,0.2); }
+  .chat-widget-panel .chat-send { padding:10px 16px; background:var(--red); border:none; cursor:pointer; color:white; font-size:14px; transition:background 0.2s; font-family:'IBM Plex Mono',monospace; }
+  .chat-widget-panel .chat-send:hover { background:var(--red-dark); }
+  @media(max-width:640px) { .chat-widget-panel { width:calc(100vw - 24px); right:12px; bottom:90px; max-height:70vh; } .chat-widget-btn { bottom:16px; right:16px; width:52px; height:52px; } }
 </style>
 </head>
 <body>
@@ -475,37 +495,112 @@
   </p>
 </footer>
 
+<button class="chat-widget-btn" id="chatWidgetBtn" onclick="toggleWidget()" aria-label="Open chat">&#128172;</button>
+<div class="chat-widget-panel" id="chatWidgetPanel">
+  <div class="chat-header">
+    <div style="width:32px;height:32px;background:var(--red);color:white;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;">CJ</div>
+    <div class="chat-header-text"><h4 style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--white);letter-spacing:0.04em;">Justice Research Assistant</h4><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--dust);">Powered by AI</span></div>
+    <button class="chat-widget-close" onclick="toggleWidget()">&#10005;</button>
+  </div>
+  <div class="chat-messages" id="widgetMessages">
+    <div class="m2 bot"><div class="m2-icon">⚖</div><div class="m2-bubble">Have questions about the documented record? Ask me anything.</div></div>
+  </div>
+  <div class="chat-quick-replies" id="widgetQuickReplies">
+    <button class="quick-reply" onclick="sendQuick('What are Brady Rule violations?', true)">Brady violations</button>
+    <button class="quick-reply" onclick="sendQuick('What is the Buenger timeline?', true)">Buenger timeline</button>
+  </div>
+  <div class="chat-input-bar">
+    <input type="text" class="chat-input" id="widgetInput" placeholder="Ask about the record..." onkeydown="if(event.key==='Enter') sendMessage(true)">
+    <button class="chat-send" onclick="sendMessage(true)">&#10148;</button>
+  </div>
+</div>
+
 <script>
-const justiceSystem = `You are an educational AI assistant for Carroll County Justice, focused on prosecutorial accountability in Carroll County's 2026 State's Attorney race. You explain documented facts clearly.
+const SESSION_ID = crypto.randomUUID();
+const conversationHistory = [];
 
-THE BUENGER SCANDAL — COMPLETE FACTS:
-February 2022: Acting SA Allan Culver and Deputy SA Edward Coyne were told by their own prosecutor Jennifer Brady that state troopers had given Sheriff's Deputy Sean Buenger a fake drug house address. Buenger wrote a fraudulent search warrant affidavit claiming he'd found evidence there. Brady warned Culver REPEATEDLY over months. At least 4 people held in jail without bond in Buenger cases. Culver called it a "rumor" and took no action.
+async function callClaude(msg) {
+  conversationHistory.push({role:'user',content:msg});
+  const r = await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:conversationHistory,site:'site3-justice',session_id:SESSION_ID})});
+  const d = await r.json();
+  const reply = d.content?.[0]?.text || "I'm sorry, I had trouble responding. Please try again.";
+  conversationHistory.push({role:'assistant',content:reply});
+  return reply;
+}
 
-May 27, 2022: Judge Richard Titus held a hearing. Brady testified under oath. Culver still called it a "rumor." Judge Titus: "If anything, my concerns are magnified."
+function toggleWidget() {
+  const panel = document.getElementById('chatWidgetPanel');
+  const btn = document.getElementById('chatWidgetBtn');
+  const isOpen = panel.classList.toggle('open');
+  btn.textContent = isOpen ? '\u2715' : '\uD83D\uDCAC';
+}
 
-June 1, 2022: ALL FOUR Carroll County Circuit Court judges banned Culver from their courtrooms. Deputy SA Coyne resigned 3 days later. One conviction overturned. Maryland Public Defender Natasha Dartigue: "Prosecutors are required to seek out misconduct and disclose it, which they egregiously failed to do here." Carroll County NAACP president Rodney Morris publicly called for investigation of other affected cases.
+function appendMessage(role, text, isWidget) {
+  const containerId = isWidget ? 'widgetMessages' : 'chatMsgs3';
+  const c = document.getElementById(containerId);
+  const d = document.createElement('div');
+  d.className = `m2 ${role}`;
+  const icon = role === 'bot' ? '⚖' : '◉';
+  d.innerHTML = `<div class="m2-icon">${icon}</div><div class="m2-bubble">${text.replace(/\n/g,'<br>')}</div>`;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
+}
 
-THE "CLEARED" CLAIM — WHY IT'S MISLEADING:
-The Maryland State Prosecutor investigated BUENGER, not Culver. The Buenger finding was "inconclusive" — not exoneration. Culver was never independently investigated. He was declared "cleared" by Haven Shoemaker — his own boss, the man Culver personally endorsed in 2022 who then hired Culver back. As one Carroll County reader wrote: "If you received an inconclusive cancer screening, would you declare yourself cancer free?" The judges' ban was based on sworn testimony and was never reversed.
+function syncMessage(role, text) {
+  appendMessage(role, text, false);
+  appendMessage(role, text, true);
+}
 
-LEGISLATION HE OPPOSED:
-1. SB 896 — required independent oversight/investigation in police-involved incidents. Culver called it "irrelevant" in his own written testimony. Would have forced exactly the kind of oversight that might have caught the Buenger situation.
-2. SB 763 — required public data collection on all prosecutorial decisions (65 categories per case). Would have enabled public to identify overreach patterns. Culver opposed both.
-Source: mgaleg.maryland.gov — public legislative testimony.
+function showTyping(isWidget) {
+  const containerId = isWidget ? 'widgetMessages' : 'chatMsgs3';
+  const typId = isWidget ? 'widgetTyping' : 'typ3';
+  const c = document.getElementById(containerId);
+  const d = document.createElement('div');
+  d.className = 'm2 bot';
+  d.id = typId;
+  d.innerHTML = `<div class="m2-icon">⚖</div><div class="m2-bubble"><div class="typing2"><div class="t2d"></div><div class="t2d"></div><div class="t2d"></div></div></div>`;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
+}
 
-PSORAS: George Psoras — full Brady compliance, prosecute violent offenders, opioid crisis platform, victim compassion, supports oversight. "Making Crime Illegal Again in Carroll County."
+function removeTyping(isWidget) {
+  const typId = isWidget ? 'widgetTyping' : 'typ3';
+  const e = document.getElementById(typId);
+  if (e) e.remove();
+}
 
-VOTING: https://elections.maryland.gov/voter_registration/lookup.html · 410-386-2972
+async function sendMessage(isWidget) {
+  const inputId = isWidget ? 'widgetInput' : 'chatIn3';
+  const i = document.getElementById(inputId);
+  const t = i.value.trim();
+  if (!t) return;
+  i.value = '';
+  document.getElementById('chatQR3').style.display = 'none';
+  document.getElementById('widgetQuickReplies').style.display = 'none';
+  syncMessage('user', t);
+  showTyping(true);
+  showTyping(false);
+  try {
+    const r = await callClaude(t);
+    removeTyping(true);
+    removeTyping(false);
+    syncMessage('bot', r);
+  } catch(e) {
+    removeTyping(true);
+    removeTyping(false);
+    syncMessage('bot', 'Connection error. Please try again.');
+  }
+}
 
-TONE: Educational, factual, direct. 2-3 paragraphs. Always encourage voting.`;
+function sendQuick(t, isWidget) {
+  const inputId = isWidget ? 'widgetInput' : 'chatIn3';
+  document.getElementById(inputId).value = t;
+  sendMessage(isWidget);
+}
 
-const hist3 = [];
-async function callAI3(msg){hist3.push({role:'user',content:msg});const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:justiceSystem,messages:hist3})});const d=await r.json();const reply=d.content?.[0]?.text||'Connection error. Please try again.';hist3.push({role:'assistant',content:reply});return reply;}
-function addMsg3(role,text){const c=document.getElementById('chatMsgs3');const d=document.createElement('div');d.className=`m2 ${role}`;const icon=role==='bot'?'⚖':'◉';d.innerHTML=`<div class="m2-icon">${icon}</div><div class="m2-bubble">${text.replace(/\n/g,'<br>')}</div>`;c.appendChild(d);c.scrollTop=c.scrollHeight;}
-function showT3(){const c=document.getElementById('chatMsgs3');const d=document.createElement('div');d.className='m2 bot';d.id='typ3';d.innerHTML=`<div class="m2-icon">⚖</div><div class="m2-bubble"><div class="typing2"><div class="t2d"></div><div class="t2d"></div><div class="t2d"></div></div></div>`;c.appendChild(d);c.scrollTop=c.scrollHeight;}
-function removeT3(){const e=document.getElementById('typ3');if(e)e.remove();}
-async function send3(){const i=document.getElementById('chatIn3');const t=i.value.trim();if(!t)return;i.value='';document.getElementById('chatQR3').style.display='none';addMsg3('user',t);showT3();try{const r=await callAI3(t);removeT3();addMsg3('bot',r);}catch(e){removeT3();addMsg3('bot','Connection error. Please try again.');}}
-function sq3(t){document.getElementById('chatIn3').value=t;send3();}
+function sq3(t) { sendQuick(t, false); }
+function send3() { sendMessage(false); }
+
 function handleRRN3(e){
   e.preventDefault();
   const data={
