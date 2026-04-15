@@ -180,7 +180,74 @@
   .rrn3-ok h4{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.06em;color:var(--white);margin-bottom:10px;}
   .rrn3-ok p{font-size:15px;color:var(--sand);line-height:1.7;font-weight:300;}
   .rrn3-disc{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--charcoal);text-align:center;margin-top:16px;line-height:1.8;letter-spacing:0.04em;}
-  @media(max-width:640px){nav,.hero,.explainer,.cc-case,.cover-story,.legislation,.cta-band,.chat-section,footer{padding-left:20px;padding-right:20px;}.topbar{padding:8px 20px;flex-direction:column;gap:4px;text-align:center;}.hero h1{font-size:52px;}.nav-links{display:none;}.ct-item{flex-direction:column;}.ct-date{text-align:left;padding-top:0;}}
+  /* CRIME STATS BAND */
+  .crime-band { background:var(--mid); border-top:1px solid rgba(192,57,43,0.2); border-bottom:1px solid rgba(192,57,43,0.2); padding:40px; text-align:center; }
+  .crime-stats { display:flex; justify-content:center; gap:60px; flex-wrap:wrap; margin-bottom:12px; }
+  .crime-stat { text-align:center; }
+  .crime-stat strong { display:block; font-family:'Bebas Neue',sans-serif; font-size:56px; color:var(--red); line-height:1; margin-bottom:6px; letter-spacing:0.02em; }
+  .crime-stat span { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--sand); display:block; max-width:200px; }
+  .crime-band-sub { font-family:'Crimson Pro',serif; font-size:16px; font-style:italic; color:var(--dust); margin-top:12px; }
+  .crime-band-source { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--charcoal); margin-top:8px; }
+
+  /* STORE OWNER — PROSECUTORIAL OVERREACH */
+  .overreach { background:var(--dark); padding:80px 40px; border-top:1px solid rgba(192,57,43,0.2); }
+  .overreach h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,56px); letter-spacing:0.04em; color:var(--white); margin-bottom:12px; }
+  .overreach-narrative { max-width:720px; }
+  .overreach-narrative p { font-size:18px; color:var(--sand); line-height:1.7; font-weight:300; margin-bottom:20px; }
+  .overreach-narrative p strong { color:var(--cream); font-weight:600; }
+  .overreach-verdict { background:var(--amber); padding:28px 36px; text-align:center; max-width:720px; margin:32px 0; }
+  .overreach-verdict .ov-label { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(12,12,11,0.6); margin-bottom:6px; }
+  .overreach-verdict .ov-text { font-family:'Bebas Neue',sans-serif; font-size:48px; color:var(--black); letter-spacing:0.04em; }
+  .overreach-verdict .ov-sub { font-size:13px; color:rgba(12,12,11,0.7); margin-top:4px; }
+  .overreach-contrast { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--charcoal); max-width:720px; margin-top:32px; }
+  .overreach-col { background:var(--dark); padding:24px; }
+  .overreach-col h4 { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:0.04em; margin-bottom:12px; }
+  .overreach-col.psoras h4 { color:var(--amber); }
+  .overreach-col.culver h4 { color:var(--red); }
+  .overreach-col ul { list-style:none; }
+  .overreach-col ul li { font-size:14px; color:var(--sand); line-height:1.65; padding:5px 0; display:flex; align-items:flex-start; gap:8px; font-weight:300; }
+  .overreach-col.psoras ul li::before { content:'\2713'; color:var(--amber); flex-shrink:0; font-family:'IBM Plex Mono',monospace; font-weight:500; }
+  .overreach-col.culver ul li::before { content:'\2717'; color:var(--red); flex-shrink:0; font-family:'IBM Plex Mono',monospace; }
+  .overreach-source { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--charcoal); margin-top:20px; }
+
+  /* MPRP — FAILURE TO PROTECT */
+  .mprp-section { background:var(--black); padding:80px 40px; border-top:1px solid rgba(192,57,43,0.2); }
+  .mprp-section h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(32px,4vw,48px); letter-spacing:0.04em; color:var(--white); margin-bottom:12px; }
+  .mprp-body { max-width:720px; }
+  .mprp-body p { font-size:17px; color:var(--sand); line-height:1.7; font-weight:300; margin-bottom:16px; }
+  .mprp-body p strong { color:var(--cream); font-weight:600; }
+  .mprp-threat-list { list-style:none; margin:20px 0; }
+  .mprp-threat-list li { font-size:15px; color:var(--sand); line-height:1.65; padding:8px 0; border-bottom:1px solid rgba(192,57,43,0.1); display:flex; align-items:flex-start; gap:10px; font-weight:300; }
+  .mprp-threat-list li:last-child { border:none; }
+  .mprp-threat-list li::before { content:'\26A0'; color:var(--red); flex-shrink:0; }
+  .mprp-positions { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--charcoal); max-width:720px; margin-top:28px; }
+  .mprp-pos { background:var(--dark); padding:24px; }
+  .mprp-pos h4 { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:0.04em; margin-bottom:8px; }
+  .mprp-pos.fight h4 { color:var(--amber); }
+  .mprp-pos.silent h4 { color:var(--red); }
+  .mprp-pos p { font-size:14px; color:var(--sand); line-height:1.65; font-weight:300; }
+  .mprp-pos-source { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--charcoal); margin-top:16px; }
+
+  /* DREAM TEAM */
+  .team-section { background:var(--dark); padding:80px 40px; border-top:1px solid rgba(192,57,43,0.2); }
+  .team-section h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(32px,4vw,48px); letter-spacing:0.04em; color:var(--white); margin-bottom:8px; }
+  .team-section .team-sub { font-size:17px; color:var(--sand); font-weight:300; margin-bottom:40px; }
+  .team-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--charcoal); margin-bottom:32px; }
+  .team-card { background:var(--dark); padding:32px; }
+  .team-card-photo { width:80px; height:80px; background:var(--mid); border:1px solid rgba(201,135,42,0.3); display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--amber); margin-bottom:16px; overflow:hidden; }
+  .team-card-photo img { width:100%; height:100%; object-fit:cover; }
+  .team-card h3 { font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:0.04em; color:var(--amber); margin-bottom:4px; }
+  .team-card .team-title { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--dust); margin-bottom:16px; }
+  .team-card ul { list-style:none; }
+  .team-card ul li { font-size:13px; color:var(--sand); line-height:1.6; padding:4px 0; display:flex; align-items:flex-start; gap:8px; font-weight:300; }
+  .team-card ul li::before { content:'\2192'; color:var(--amber); flex-shrink:0; font-family:'IBM Plex Mono',monospace; }
+  .team-promises { background:var(--mid); padding:28px 24px; }
+  .team-promises h4 { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:0.04em; color:var(--cream); margin-bottom:12px; }
+  .team-promises ul { list-style:none; }
+  .team-promises ul li { font-size:14px; color:var(--sand); line-height:1.65; padding:5px 0; display:flex; align-items:flex-start; gap:8px; font-weight:300; }
+  .team-promises ul li::before { content:'\2192'; color:var(--amber); flex-shrink:0; font-family:'IBM Plex Mono',monospace; }
+
+  @media(max-width:640px){nav,.hero,.explainer,.cc-case,.cover-story,.legislation,.cta-band,.chat-section,footer,.overreach,.mprp-section,.team-section{padding-left:20px;padding-right:20px;}.topbar{padding:8px 20px;flex-direction:column;gap:4px;text-align:center;}.hero h1{font-size:52px;}.nav-links{display:none;}.ct-item{flex-direction:column;}.ct-date{text-align:left;padding-top:0;}.crime-stats{gap:32px;}.crime-stat strong{font-size:40px;}.overreach-contrast{grid-template-columns:1fr;}.mprp-positions{grid-template-columns:1fr;}.team-grid{grid-template-columns:1fr;}}
 
   /* FLOATING CHAT WIDGET */
   .chat-widget-btn { position:fixed; bottom:28px; right:28px; z-index:999; width:60px; height:60px; border-radius:50%; background:var(--red); color:white; border:none; cursor:pointer; font-size:24px; box-shadow:0 4px 20px rgba(0,0,0,0.4); transition:all 0.3s; display:flex; align-items:center; justify-content:center; }
@@ -217,7 +284,10 @@
     <a href="#carroll">The Carroll County Case</a>
     <a href="#cover">The Cover Story</a>
     <a href="#bills">The Bills He Killed</a>
+    <a href="#overreach">The Case</a>
+    <a href="#mprp">Property</a>
     <a href="#report">Evidence</a>
+    <a href="#team">The Team</a>
     <a href="#network">Join Network</a>
     <a href="#action">Take Action</a>
   </div>
@@ -265,6 +335,17 @@
     </div>
   </div>
 </section>
+
+<!-- CRIME STATS -->
+<div class="crime-band">
+  <div class="crime-stats">
+    <div class="crime-stat"><strong>173%</strong><span>Crime surge under Culver's watch</span></div>
+    <div class="crime-stat"><strong>$991</strong><span>Cost of crime per household per year</span></div>
+    <div class="crime-stat"><strong>Every 2 hrs</strong><span>A crime occurs in Carroll County</span></div>
+  </div>
+  <p class="crime-band-sub">2022 was Culver's year as Acting State's Attorney. The numbers speak for themselves.</p>
+  <p class="crime-band-source">Sources: FBI NIBRS Data 2021-2022 · CrimeGrade.org 2025</p>
+</div>
 
 <!-- CARROLL COUNTY CASE -->
 <section class="cc-case" id="carroll">
@@ -387,10 +468,77 @@
   </div>
 </section>
 
+<!-- STORE OWNER — PROSECUTORIAL OVERREACH -->
+<section class="overreach" id="overreach">
+  <div class="section-inner">
+    <div class="exp-label">Prosecutorial Overreach</div>
+    <div class="overreach-narrative">
+      <h2>He Prosecuted the Victim.</h2>
+      <p>Two criminals broke into a Carroll County small business. When the owner defended himself, <strong>Culver's office charged the victim with assault</strong> — and ignored the criminals who broke in.</p>
+      <p>The community demanded the charges be dropped. Culver's office ignored them and pressed forward with the prosecution.</p>
+      <p>George Psoras took the case. He defended the store owner in Carroll County Circuit Court. <strong>The judge disagreed with Culver's office completely.</strong></p>
+      <div class="overreach-verdict">
+        <div class="ov-label">Verdict — Carroll County Circuit Court</div>
+        <div class="ov-text">NOT GUILTY</div>
+        <div class="ov-sub">Judge Stansfield — The prosecution should never have happened.</div>
+      </div>
+    </div>
+    <div class="overreach-contrast">
+      <div class="overreach-col psoras">
+        <h4>Psoras</h4>
+        <ul>
+          <li>Defended the store owner</li>
+          <li>Believed in the right to self-defense</li>
+          <li>Won — NOT GUILTY</li>
+          <li>Fights for victims, not against them</li>
+        </ul>
+      </div>
+      <div class="overreach-col culver">
+        <h4>Culver</h4>
+        <ul>
+          <li>Prosecuted the store owner</li>
+          <li>Charged the victim with assault</li>
+          <li>Lost — wasted tax dollars</li>
+          <li>Ignored community outrage</li>
+        </ul>
+      </div>
+    </div>
+    <p class="overreach-source">Source: Carroll County Circuit Court, Judge Stansfield</p>
+  </div>
+</section>
+
+<!-- MPRP — PROPERTY RIGHTS -->
+<section class="mprp-section" id="mprp">
+  <div class="section-inner">
+    <div class="exp-label">Failure to Protect</div>
+    <div class="mprp-body">
+      <h2>A Corporation Is Coming for Your Land. Your State's Attorney Is Silent.</h2>
+      <p>The <strong>Maryland Piedmont Reliability Project (MPRP)</strong> — a proposal by PSEG, a New Jersey corporation — would cut a 150-foot-wide, 70-mile path through Carroll County. PSEG has already filed court motions to force entry onto private land.</p>
+      <ul class="mprp-threat-list">
+        <li><strong>400+ properties</strong> threatened — farms, homes, forests, businesses</li>
+        <li>PSEG has filed court motions to <strong>force surveyors</strong> onto your land without permission</li>
+        <li>If you refuse, they invoke <strong>eminent domain</strong></li>
+        <li>Carroll County Commissioners <strong>officially oppose</strong> MPRP</li>
+      </ul>
+    </div>
+    <div class="mprp-positions">
+      <div class="mprp-pos fight">
+        <h4>Psoras Will Fight</h4>
+        <p>Opposes MPRP. No eminent domain for corporate gain. No surveyors without consent. 38 years defending people against powerful interests.</p>
+      </div>
+      <div class="mprp-pos silent">
+        <h4>Culver Is Silent</h4>
+        <p>No public position opposing MPRP. No statement protecting Carroll County landowners. Silent while a corporation files motions against your property.</p>
+      </div>
+    </div>
+    <p class="mprp-pos-source">Sources: Carroll County Board of Commissioners Resolution · WMAR2 News (April 2025) · Baltimore Sun</p>
+  </div>
+</section>
+
 <!-- CTA -->
 <div class="cta-band" id="action">
   <h2>Carroll County Can Do Better.</h2>
-  <p>George Psoras has pledged full Brady Rule compliance, prosecutorial transparency, and a State's Attorney's office that serves the community. Vote in 2026.</p>
+  <p>George Psoras and Joe Murtha have pledged full Brady Rule compliance, prosecutorial transparency, and a State's Attorney's office that serves Carroll County — not itself. Republican Primary June 23. Early Voting June 11.</p>
   <div class="cta-actions">
     <a href="https://elections.maryland.gov/voter_registration/lookup.html" target="_blank" class="cta-btn">Find My Polling Place</a>
     <a href="https://opposeallanculver.com" target="_blank" class="cta-btn-outline">Full Documentation</a>
@@ -405,6 +553,54 @@
     <p>22 pages of court records, sworn testimony, legislative records, and published journalism. Every claim sourced. Every quote attributed. Read it yourself.</p>
     <a href="/culver-citizens-report.pdf" download class="report-download">Download the Evidence (PDF) →</a>
     <p class="report-meta">Carroll County Citizens' Report · March 2026 · Version 1.0<br>Paid for by Carroll County Small Businesses PAC. Not authorized by any candidate or candidate's committee.</p>
+  </div>
+</section>
+
+<!-- DREAM TEAM -->
+<section class="team-section" id="team">
+  <div class="section-inner">
+    <div class="exp-label">The Alternative</div>
+    <h2>Psoras & Murtha</h2>
+    <p class="team-sub">Two of Maryland's most experienced trial attorneys — committed to accountability, transparency, and Carroll County values.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-card-photo">GP</div>
+        <h3>George Psoras Jr.</h3>
+        <div class="team-title">Candidate for State's Attorney</div>
+        <ul>
+          <li>38+ years as a Maryland trial attorney</li>
+          <li>Magna Cum Laude — University of Baltimore School of Law</li>
+          <li>2026 Martindale-Hubbell Client Champion Award</li>
+          <li>Defended the store owner Culver's office prosecuted — NOT GUILTY</li>
+          <li>Opposes MPRP — fights for property rights</li>
+          <li>Lifelong Carroll County resident — Hampstead</li>
+        </ul>
+      </div>
+      <div class="team-card">
+        <div class="team-card-photo">JM</div>
+        <h3>Joe Murtha</h3>
+        <div class="team-title">Chief Deputy State's Attorney</div>
+        <ul>
+          <li>Former ASA, Howard County — felonies and death penalty cases</li>
+          <li>AV Preeminent — Martindale-Hubbell's highest peer rating</li>
+          <li>Named Super Lawyer every year</li>
+          <li>John Adams Award — US District Court, District of Maryland</li>
+          <li>Fellow, American College of Trial Lawyers</li>
+          <li>Won acquittals: Linda Tripp case, Freddie Gray Officer Porter case</li>
+        </ul>
+      </div>
+    </div>
+    <div class="team-promises">
+      <h4>What They Will Do for Carroll County</h4>
+      <ul>
+        <li>Personally prosecute serious cases — in the courtroom every day</li>
+        <li>Full Brady Rule compliance — mandatory evidence disclosure, no exceptions</li>
+        <li>Hire prosecutors who reflect Carroll County values</li>
+        <li>Specialized prosecution units with Sheriff and State Police</li>
+        <li>Defend property owners, business owners, and crime victims</li>
+        <li>Full transparency — the community will always know what's happening</li>
+      </ul>
+    </div>
   </div>
 </section>
 
