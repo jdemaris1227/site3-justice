@@ -601,24 +601,29 @@ function sendQuick(t, isWidget) {
 function sq3(t) { sendQuick(t, false); }
 function send3() { sendMessage(false); }
 
-function handleRRN3(e){
+function handleRRN3(e) {
   e.preventDefault();
-  const data={
-    firstName:document.getElementById('rrn3First').value,
-    lastName:document.getElementById('rrn3Last').value,
-    email:document.getElementById('rrn3Email').value,
-    phone:document.getElementById('rrn3Phone').value,
-    city:document.getElementById('rrn3City').value,
-    source:'carrollcountyjustice.org',
-    timestamp:new Date().toISOString()
+  const f = e.target;
+  const checks = f.querySelectorAll('input[type=checkbox]');
+  const data = {
+    firstName: document.getElementById('rrn3First').value,
+    lastName: document.getElementById('rrn3Last').value,
+    email: document.getElementById('rrn3Email').value,
+    phone: document.getElementById('rrn3Phone').value,
+    city: document.getElementById('rrn3City').value,
+    optEmail: checks[0]?.checked || false,
+    optText: checks[1]?.checked || false,
+    optVoter: checks[2]?.checked || false,
+    source: 'site3-justice',
+    timestamp: new Date().toISOString()
   };
-  fetch('https://formspree.io/f/YOUR_FORM_ID',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify(data)
-  }).catch(()=>{});
-  document.getElementById('rrnForm3').style.display='none';
-  document.getElementById('rrnOk3').style.display='block';
+  fetch('/api/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(() => {});
+  document.getElementById('rrnForm3').style.display = 'none';
+  document.getElementById('rrnOk3').style.display = 'block';
 }
 </script>
 </body>
